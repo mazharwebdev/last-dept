@@ -1,6 +1,7 @@
 Depot::Application.routes.draw do
   
   get 'admin' => 'admin#index'
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -11,6 +12,7 @@ Depot::Application.routes.draw do
   get "admin/index"
   get "sessions/new"
   get "sessions/create"
+  
   resources :users
 
   resources :orders
@@ -25,5 +27,13 @@ Depot::Application.routes.draw do
   end
 
 
-  root 'store#index', as: 'store'
+  # root 'store#index', as: 'store'
+
+
+  scope '(:locale)' do
+    resources :orders
+    resources :line_items
+    resources :carts
+    root 'store#index', as: 'store', via: :all
+  end
 end
