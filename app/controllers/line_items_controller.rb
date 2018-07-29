@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
-  
+  skip_before_action :authorize, only: :create
+    
   include CurrentCart # Module Concerns
   
   before_action :set_cart, only: [:create]  
